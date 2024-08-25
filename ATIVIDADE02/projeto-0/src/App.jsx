@@ -31,9 +31,7 @@ function App() {
 
     let contadorAcertos = 0;
 
-    for (const [questao, respostaCorreta] of Object.entries(
-      respostasCorretas
-    )) {
+    for (const [questao, respostaCorreta] of Object.entries(respostasCorretas)) {
       if (respostasSelecionadas[questao] === respostaCorreta) {
         document.getElementById(`${questao}`).style.backgroundColor = "green";
         contadorAcertos++;
@@ -124,9 +122,7 @@ function App() {
           </div>
 
           <div id="questao2">
-            <p className="titulo">
-              Questão 2 - Qual tag que enumera uma lista?
-            </p>
+            <p className="titulo">Questão 2 - Qual tag que enumera uma lista?</p>
             <ul>
               <li>
                 <input
