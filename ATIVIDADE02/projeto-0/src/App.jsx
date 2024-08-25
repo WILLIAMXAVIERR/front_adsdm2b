@@ -2,49 +2,87 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [acertos, setAcertos] = useState(0);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const q1 = document.querySelector('input[name="questao1"]:checked');
+    const q2 = document.querySelector('input[name="questao2"]:checked');
+    const q3 = document.querySelector('input[name="questao3"]:checked');
+    const q4 = document.querySelector('input[name="questao4"]:checked');
+    const q5 = document.querySelector('input[name="questao5"]:checked');
+
+    const respostasCorretas = {
+      questao1: "400",
+      questao2: "ol",
+      questao3: "americaDoSul",
+      questao4: "falso",
+      questao5: "falso",
+    };
+
+    const respostasSelecionadas = {
+      questao1: q1 ? q1.value : "",
+      questao2: q2 ? q2.value : "",
+      questao3: q3 ? q3.value : "",
+      questao4: q4 ? q4.value : "",
+      questao5: q5 ? q5.value : "",
+    };
+
+    let contadorAcertos = 0;
+
+    for (const [questao, respostaCorreta] of Object.entries(respostasCorretas)) {
+      if (respostasSelecionadas[questao] === respostaCorreta) {
+        document.getElementById(`${questao}`).style.backgroundColor = "green";
+        contadorAcertos++;
+      } else {
+        document.getElementById(`${questao}`).style.backgroundColor = "red";
+      }
+    }
+
+    setAcertos(contadorAcertos);
+    alert(`Você acertou ${contadorAcertos} questões!`);
+  };
 
   return (
-    <>
-      <body>
-        <header>
-          <h1> Avaliação</h1>
-        </header>
+    <div>
+      <header>
+        <h1>Avaliação</h1>
+      </header>
 
-        <main>
-          <form id="meu-formulario">
-            <div className="identificar">
-              <label htmlFor="nome_aluno" className="form-label" required>
-                Nome completo :
-              </label>
-              <input
-                type="text"
-                name="form-control"
-                id="nome"
-                placeholder="Digite seu nome completo"
-                className="input-field"
-              />
-            </div>
+      <main>
+        <form id="meu-formulario" onSubmit={handleSubmit}>
+          <div className="identificar">
+            <label htmlFor="nome_aluno" className="form-label" required>
+              Nome completo:
+            </label>
+            <input
+              type="text"
+              name="form-control"
+              id="nome"
+              placeholder="Digite seu nome completo"
+              className="input-field"
+            />
+          </div>
 
-            <div className="identificar">
-              <label htmlFor="matricula_aluno" className="form-label" required>
-                Matrícula :
-              </label>
-              <input
-                type="text"
-                id="matricula"
-                placeholder="Digite sua matrícula"
-                className="input-field"
-              />
-            </div>
-          </form>
+          <div className="identificar">
+            <label htmlFor="matricula_aluno" className="form-label" required>
+              Matrícula:
+            </label>
+            <input
+              type="text"
+              id="matricula"
+              placeholder="Digite sua matrícula"
+              className="input-field"
+            />
+          </div>
 
-          <div id="q1">
+          <div id="questao1">
             <p className="titulo">
               Questão 1 - Qual o resultado da equação: 258 + 142?
             </p>
             <ul>
-              <li id="a1">
+              <li>
                 <input
                   type="radio"
                   name="questao1"
@@ -53,7 +91,7 @@ function App() {
                 />
                 <label htmlFor="alternativas_a1">A) 400</label>
               </li>
-              <li id="b2">
+              <li>
                 <input
                   type="radio"
                   name="questao1"
@@ -62,7 +100,7 @@ function App() {
                 />
                 <label htmlFor="alternativas_b2">B) 300</label>
               </li>
-              <li id="c1">
+              <li>
                 <input
                   type="radio"
                   name="questao1"
@@ -71,7 +109,7 @@ function App() {
                 />
                 <label htmlFor="alternativas_c1">C) 324</label>
               </li>
-              <li id="d1">
+              <li>
                 <input
                   type="radio"
                   name="questao1"
@@ -82,12 +120,11 @@ function App() {
               </li>
             </ul>
           </div>
-          <div id="q2">
-            <p className="titulo">
-              Questão 2 - Qual tag que enumera uma lista?
-            </p>
+
+          <div id="questao2">
+            <p className="titulo">Questão 2 - Qual tag que enumera uma lista?</p>
             <ul>
-              <li id="a2">
+              <li>
                 <input
                   type="radio"
                   name="questao2"
@@ -96,7 +133,7 @@ function App() {
                 />
                 <label htmlFor="alternativa_a2">A) li</label>
               </li>
-              <li id="b2">
+              <li>
                 <input
                   type="radio"
                   name="questao2"
@@ -105,7 +142,7 @@ function App() {
                 />
                 <label htmlFor="alternativa_b2">B) ul</label>
               </li>
-              <li id="c2">
+              <li>
                 <input
                   type="radio"
                   name="questao2"
@@ -114,7 +151,7 @@ function App() {
                 />
                 <label htmlFor="alternativa_c2">C) ol</label>
               </li>
-              <li id="d2">
+              <li>
                 <input
                   type="radio"
                   name="questao2"
@@ -125,12 +162,13 @@ function App() {
               </li>
             </ul>
           </div>
-          <div id="q3">
+
+          <div id="questao3">
             <p className="titulo">
               Questão 3 - Em qual continente fica o Brasil?
             </p>
             <ul>
-              <li id="a3">
+              <li>
                 <input
                   type="radio"
                   name="questao3"
@@ -139,7 +177,7 @@ function App() {
                 />
                 <label htmlFor="alternativa_a3">A) Ásia</label>
               </li>
-              <li id="b3">
+              <li>
                 <input
                   type="radio"
                   name="questao3"
@@ -148,7 +186,7 @@ function App() {
                 />
                 <label htmlFor="alternativa_b3">B) África</label>
               </li>
-              <li id="c4">
+              <li>
                 <input
                   type="radio"
                   name="questao3"
@@ -157,7 +195,7 @@ function App() {
                 />
                 <label htmlFor="alternativa_c4">C) Europa</label>
               </li>
-              <li id="d4">
+              <li>
                 <input
                   type="radio"
                   name="questao3"
@@ -168,12 +206,13 @@ function App() {
               </li>
             </ul>
           </div>
-          <div id="q4">
+
+          <div id="questao4">
             <p className="titulo">
               Questão 4 - Computadores são feitos de adamantium.
             </p>
             <ul>
-              <li id="v1">
+              <li>
                 <input
                   type="radio"
                   name="questao4"
@@ -182,16 +221,17 @@ function App() {
                 />
                 <label htmlFor="v1">Verdadeiro</label>
               </li>
-              <li id="f1">
+              <li>
                 <input type="radio" name="questao4" id="f1" value="falso" />
                 <label htmlFor="f1">Falso</label>
               </li>
             </ul>
           </div>
-          <div id="q5">
+
+          <div id="questao5">
             <p className="titulo">Questão 5 - Sorvete causa gripe.</p>
             <ul>
-              <li id="v2">
+              <li>
                 <input
                   type="radio"
                   name="questao5"
@@ -200,18 +240,20 @@ function App() {
                 />
                 <label htmlFor="v2">Verdadeiro</label>
               </li>
-              <li id="f2">
+              <li>
                 <input type="radio" name="questao5" id="f2" value="falso" />
                 <label htmlFor="f2">Falso</label>
               </li>
             </ul>
           </div>
+
           <button type="submit" className="btn_btn-primary">
             Enviar
           </button>
-        </main>
-      </body>
-    </>
+        </form>
+      </main>
+    </div>
   );
 }
+
 export default App;
