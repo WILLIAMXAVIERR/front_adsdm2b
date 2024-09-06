@@ -9,6 +9,8 @@ function App() {
 
     const q1 = document.querySelector('input[name="questao1"]:checked');
     const q2 = document.querySelector('input[name="questao2"]:checked');
+
+    
     const q3 = document.querySelector('input[name="questao3"]:checked');
     const q4 = document.querySelector('input[name="questao4"]:checked');
     const q5 = document.querySelector('input[name="questao5"]:checked');
