@@ -12,9 +12,12 @@ function App() {
 
   return (
     <>
-      <Events/> //Chamando componente Events
-      <FocusBlurExample/> //Chamando componente FocusBlurExample   
-      <EventExamples/> //Chamando componente EventExamples
+      //Chamando componente Events
+      <Events/> 
+      //Chamando componente FocusBlurExample 
+      <FocusBlurExample/>   
+      //Chamando componente EventExamples
+      <EventExamples/> 
     </>
   )
 }
