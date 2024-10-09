@@ -72,6 +72,7 @@ const EventExamples = () => {
         <button type="submit">Enviar Formulário (onSubmit)</button>
       </form>
       {submitMessage && <p>{submitMessage}</p>}
+      console.log('submitMessage', submitMessage);
     </div>
   );
 }
